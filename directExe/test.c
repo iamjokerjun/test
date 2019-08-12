@@ -1,4 +1,5 @@
- #include <stdio.h>
+#define _GNU_SOURCE
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -6,6 +7,8 @@
 #include <sys/syscall.h>
 #include <sys/time.h>
 #include <pthread.h>
+
+//测试 把2个线程绑定到一个核上去 然后有2个管道 一个线程写完管道1就读取管道2，另外一个线程读完后管道2就写管道1 这样在一个核心上，线程就会轮流调度（读取时没数据会交出时间片，另外一个线程就有机会读取）。
 
 //是否打开上下文测试 本地测试打开不打开测试之差为300ms左右  所以测量上下文切换的时间消耗在3微妙左右
 #define TEST_CONTEXT_SWITCH 
