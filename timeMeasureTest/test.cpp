@@ -44,7 +44,9 @@ void testClock() {
 
 void testClockGetTime() {
 	struct timespec start,end;
-	clockid_t id = CLOCK_REALTIME; 
+	//clockid_t id = CLOCK_REALTIME; 			//测量钟表时间
+	clockid_t id = CLOCK_PROCESS_CPUTIME_ID;	//测量cpu时间 	类似clock函数了
+	//clockid_t id = CLOCK_MONOTONIC; 			//测量钟表时间  不受系统时间修改的影响
 	clock_gettime(id,&start);
 	fun();
 	clock_gettime(id,&end);
